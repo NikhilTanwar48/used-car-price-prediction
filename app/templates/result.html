@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valuation Report | CarPrice AI Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #6366f1; --bg: #0f172a; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: white; margin: 0;
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; overflow: hidden;
+        }
+
+        .xray-background {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: screen; 
+            opacity: 0.2; 
+            z-index: -1; 
+            pointer-events: none;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .report-box {
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            padding: 3rem; 
+            border-radius: 40px;
+            width: 90%; 
+            max-width: 600px;
+            text-align: center; 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+            z-index: 10;
+        }
+
+        .final-price { font-size: 5.5rem; font-weight: 800; color: white; margin: 0; }
+        .label { color: #94a3b8; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 4px; }
+        
+        .details-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; 
+            background: rgba(0, 0, 0, 0.2); padding: 25px; border-radius: 20px; margin-top: 30px;
+        }
+        .spec-item small { color: var(--accent); text-transform: uppercase; font-size: 0.65rem; font-weight: 700; }
+        .spec-item div { font-size: 1.1rem; font-weight: 600; margin-top: 5px; }
+
+        .btn-retry {
+            display: inline-block; margin-top: 30px; color: white; text-decoration: none; 
+            background: var(--accent); padding: 14px 40px; border-radius: 12px; font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-retry:hover { background: #4f46e5; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    {% set bg_image = 'sedan.jpeg' %}
+    {% if input.Body_Type == 'suv' %}
+        {% set bg_image = 'suv.jpeg' %}
+    {% elif input.Body_Type == 'limousine' %}
+        {% set bg_image = 'sedan.jpeg' %}
+    {% elif input.Body_Type == 'kleinwagen' %}
+        {% set bg_image = 'hatchback.jpeg' %}
+    {% elif input.Body_Type == 'kombi' %}
+        {% set bg_image = 'station wagon.jpeg' %}
+    {% endif %}
+
+    <div class="xray-background" 
+         style="background-image: url('{{ url_for('static', filename='images/' + bg_image) }}');">
+    </div>
+
+    <div class="report-box">
+        <div class="label">Valuation Complete</div>
+        <div class="final-price">€{{ "{:,.0f}".format(result.predicted_price) }}</div>
+        
+        <p style="color: #94a3b8;">Range: €{{ "{:,.0f}".format(result.confidence_low) }} — €{{ "{:,.0f}".format(result.confidence_high) }}</p>
+
+        <div class="details-grid">
+            <div class="spec-item"><small>Asset</small><div>{{ input.Make }} {{ input.Model }}</div></div>
+            <div class="spec-item"><small>Power</small><div>{{ input.Power_HP }} HP</div></div>
+            <div class="spec-item"><small>Usage</small><div>{{ "{:,.0f}".format(input.Mileage_km|int) }} KM</div></div>
+            <div class="spec-item"><small>Lifecycle</small><div>{{ input.Age }} Years / {{ input.Body_Type|title }}</div></div>
+        </div>
+
+        <a href="/" class="btn-retry">Execute New Valuation</a>
+    </div>
+
+</body>
+</html>

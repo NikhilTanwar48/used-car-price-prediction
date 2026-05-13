@@ -1,0 +1,30 @@
+project_name: car-price-predictor
+
+paths:
+  raw_autoscout: "data/raw/auto_scout_car.csv"
+  raw_ebay: "data/raw/autos.csv"
+  processed_data: "data/processed/unified_car_data.csv"
+  model_path: "models/model.joblib"
+  preprocessor_path: "models/preprocessor.joblib"
+  reports_dir: "reports/figures/"
+
+features:
+  numerical: ["Mileage_km", "Age", "Power_kW"]
+  categorical_ordinal: ["Gearbox"]
+  categorical_onehot: ["Make", "Model", "Fuel_Type", "Body_Type"]
+  target: "Price"
+
+model_params:
+  random_state: 42
+  test_size: 0.2
+  cv_folds: 5
+  rf_params:
+    n_estimators: [100]
+    max_depth: [null, 20]
+  gb_params:
+    learning_rate: [0.1]
+    n_estimators: [100]
+
+flask:
+  host: "0.0.0.0"
+  port: 5000
