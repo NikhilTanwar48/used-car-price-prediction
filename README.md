@@ -40,7 +40,7 @@ cd used-car-price-prediction
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
+```
 
 ### 2. Setup Data & UI
 
@@ -80,4 +80,7 @@ Dataset column mapping for different CSV formats (Cardekho, AutoScout24, etc.).
 Git Ignore: Large CSV files and .joblib models are excluded via .gitignore to keep the repository lightweight.
 Inference: Predictions include a confidence interval (High/Low) to represent market volatility and model uncertainty.
 Logging: The project utilizes a structured logging system instead of standard print statements for better production monitoring.
+
+```
+
 ```
