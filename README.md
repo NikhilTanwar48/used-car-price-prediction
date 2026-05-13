@@ -18,6 +18,17 @@ A production-grade Machine Learning application that predicts fair market vehicl
 | **`run.py`**                | Main entry point to launch the Flask web server                                |
 
 ---
+## Model Performance Summary
+the model gave following results on the different techniques used
+
+| Model | RMSE | MAE | $R^2$ Score |
+| :--- | :---: | :---: | :---: |
+| **LinearRegression** | 2.6632 | 2.1379 | 0.9617 |
+| **Ridge** | 2.6633 | 2.1378 | 0.9617 |
+| **RandomForest** | 2.1642 | 1.5283 | 0.9747 |
+| **GradientBoosting** | 2.1114 | 1.5579 | 0.9759 |
+
+based on which it was decided to move forward with gradient boosting 
 
 ## ✨ Features
 
