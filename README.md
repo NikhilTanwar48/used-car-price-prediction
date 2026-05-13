@@ -57,14 +57,17 @@ Visit http://127.0.0.1:8080 in your browser to experience the dashboard.
 The system evaluates several models, with the Gradient Boosting regressor currently providing the highest fidelity. Performance charts are automatically updated in the reports/figures/ directory after training.
 
 ### Feature Importance
+<img width="1500" height="900" alt="image" src="https://github.com/user-attachments/assets/9cee899a-53a8-482f-aa1b-318a4fab14cb" />
 
 The model confirms that brand prestige (brand_avg_price) and usage (km_driven) are the primary drivers of market value.
 
 ### Model Accuracy
+<img width="1050" height="1050" alt="image" src="https://github.com/user-attachments/assets/03de5b68-391d-44b9-b285-502f8d8fc83b" />
 
 The alignment between predicted and actual prices shows a high $R^2$ score (~0.97), indicating reliable performance across various price segments.
 
 ### Residual Analysis
+<img width="1200" height="750" alt="image" src="https://github.com/user-attachments/assets/015f49e8-f20c-42be-b876-d4346414ab13" />
 
 Residuals are randomly scattered, indicating that the model has captured the underlying data patterns without significant bias.
 
